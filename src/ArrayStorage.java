@@ -13,6 +13,11 @@ public class ArrayStorage {
 
     void save(Resume r) {
         int sizeStorage = size();
+        for (int i = 0; i < sizeStorage; i++) {
+            if (r.uuid.equals(storage[i].uuid)) {
+                return;
+            }
+        }
         if (sizeStorage >= storage.length) {
             Resume[] storageTemp = new Resume[storage.length];
             System.arraycopy(storage, 0, storageTemp, 0, storage.length);
