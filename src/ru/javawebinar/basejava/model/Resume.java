@@ -1,4 +1,4 @@
-package com.basejava.webapp.model;
+package ru.javawebinar.basejava.model;
 
 import java.util.Objects;
 
