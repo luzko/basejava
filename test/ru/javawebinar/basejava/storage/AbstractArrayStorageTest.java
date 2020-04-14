@@ -6,10 +6,13 @@ import org.junit.Test;
 import ru.javawebinar.basejava.exception.NotExistStorageException;
 import ru.javawebinar.basejava.model.Resume;
 
-import static org.junit.Assert.*;
+public abstract class AbstractArrayStorageTest {
+    private Storage storage;
 
-public abstract  class AbstractArrayStorageTest {
-    private Storage storage = new ArrayStorage();
+    public AbstractArrayStorageTest(Storage storage) {
+        this.storage = storage;
+    }
+
     private static final String UUID_1 = "uuid1";
     private static final String UUID_2 = "uuid2";
     private static final String UUID_3 = "uuid3";
@@ -29,26 +32,46 @@ public abstract  class AbstractArrayStorageTest {
 
     @Test
     public void clear() {
+        storage.clear();
+        Assert.assertEquals(0, storage.size());
     }
 
     @Test
     public void update() {
+        String uuid1 = "uuid1";
+        Resume resume = new Resume(uuid1);
+        storage.update(resume);
+        Assert.assertEquals(resume, storage.get(uuid1));
     }
 
     @Test
     public void getAll() {
+        Resume[] resumes = storage.getAll();
+        Assert.assertEquals(3, resumes.length);
+        Assert.assertEquals("uuid1", resumes[0].getUuid());
     }
 
     @Test
     public void save() {
+        String uuid4 = "uuid4";
+        Resume resume = new Resume(uuid4);
+        storage.save(resume);
+        Assert.assertEquals(4, storage.size());
+        Assert.assertEquals(uuid4, storage.get(uuid4).getUuid());
     }
 
     @Test
     public void delete() {
+        String uuid1 = "uuid1";
+        storage.delete(uuid1);
+        Assert.assertEquals(2, storage.size());
     }
 
     @Test
     public void get() {
+        String uuid1 = "uuid1";
+        Resume resume = storage.get(uuid1);
+        Assert.assertEquals(uuid1, resume.getUuid());
     }
 
     @Test(expected = NotExistStorageException.class)
