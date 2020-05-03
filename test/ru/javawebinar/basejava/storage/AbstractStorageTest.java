@@ -2,6 +2,7 @@ package ru.javawebinar.basejava.storage;
 
 import org.junit.Before;
 import org.junit.Test;
+import ru.javawebinar.basejava.Config;
 import ru.javawebinar.basejava.exception.ExistStorageException;
 import ru.javawebinar.basejava.exception.NotExistStorageException;
 import ru.javawebinar.basejava.model.*;
@@ -14,7 +15,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public abstract class AbstractStorageTest {
-    public static final File STORAGE_DIR = new File("/Users/enway3/Documents/java/basejava/storage");
+    //public static final File STORAGE_DIR = new File("/Users/enway3/Documents/java/basejava/storage");
+    public static final File STORAGE_DIR = Config.get().getStorageDir();
 
     protected Storage storage;
 
